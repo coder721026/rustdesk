@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TabBarTheme;
@@ -437,6 +438,7 @@ class _DesktopTabState extends State<DesktopTab>
       await windowController.hide();
       await rustDeskWinManager
           .call(WindowType.Main, kWindowEventHide, {"id": kWindowId!});
+      SystemChannels.platform.invokeMethod('hideTaskbar');
     }
 
     macOSWindowClose(
